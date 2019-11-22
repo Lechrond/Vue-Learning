@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../lib/vue.js"></script>
+  <title>01Vue体验</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{username}}</p>
+    <p>{{greet()}}</p>
+    <button @click="username='bbb'">更改值</button>
+  </div>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        username: "aaa"
+      },
+      methods: {
+        greet() {
+          return "你好"
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

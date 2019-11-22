@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "01Vue基础"
+		}
+	],
+	"settings": {
+		"editor.tabSize": 2,
+		"files.autoSave": "afterDelay"
+	}
+}
