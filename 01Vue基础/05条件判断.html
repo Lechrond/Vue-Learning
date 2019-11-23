@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <title></title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- <p v-if="weather=='sun'">去公园</p> -->
+    <!-- <p v-else-if="weather=='rain'">去看电影</p>
+    <p v-else>哪也不去</p> -->
+    <!-- <template v-if="age<18">
+      <p>数学多少分？</p>
+      <p>英语多少分？</p>
+    </template>
+    <template v-else-if="age>=18 && age<25">
+      <p>女朋友找到了吗？</p>
+      <p>考研究生了吗？</p>
+    </template>
+    <template v-else>
+      <p>二胎生了吗？</p>
+      <p>工资多少？</p>
+    </template> -->
+    <template v-if="loginType=='username'">
+      <label>用户名:</label>
+      <input type="text" name="username" placeholder="用户名" key="username">
+    </template>
+    <template v-else-if="loginType=='email'">
+      <label>邮箱:</label>
+      <input type="text" name="email" placeholder="邮箱" key="email">
+    </template>
+    <button @click="changeLoginType">更换登陆类型</button>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        weather: "rain",
+        age:30,
+        loginType:'username'
+      },
+      methods:{
+        changeLoginType(){
+          this.loginType=this.loginType=='username'?'email':'username';
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
