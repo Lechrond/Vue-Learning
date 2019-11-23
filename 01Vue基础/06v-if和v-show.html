@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <title></title>
+</head>
+
+<body>
+  <div id='app'>
+    <div v-show="loginType=='username'">
+      <label>用户名:</label>
+      <input type="text" name="username" placeholder="用户名">
+    </div>
+    <div v-show="loginType=='email'">
+      <label>邮箱:</label>
+      <input type="text" name="email" placeholder="邮箱" key="email">
+    </div>
+    <button @click="changeLoginType">更换登陆类型</button>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        loginType:'username',
+      },
+      methods: {
+        changeLoginType() {
+          this.loginType = this.loginType == 'username' ? 'email' : 'username';
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
