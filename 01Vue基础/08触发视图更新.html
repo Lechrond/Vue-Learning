@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <title></title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- <ul v-for="hero in heros">
+      <li> {{hero}}
+      </li>
+    </ul>
+    <button @click="update">change</button> -->
+    <ul v-for="(value,key) in person">
+      <li>
+        {{key}}|{{value}}
+      </li>
+    </ul>
+    <button @click="addattr">change</button>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        heros: ['钢铁侠', '蜘蛛侠', '蝙蝠侠'],
+        person: {
+          name: 'abc',
+          age: 18,
+        }
+      },
+      methods: {
+        update() {
+          // this.heros = ['黑寡妇']
+          // this.heros.slice(0, 2);
+          // this.heros.push("灭霸")
+          // 下面的方式无效
+          // this.heros[0]='美国队长'
+          // 下面的方式修改有效
+          Vue.set(this.heros, 0, '美国队长')
+        },
+        addattr(){
+          Vue.set(this.person,'hometown','中国')
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
