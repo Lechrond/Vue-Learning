@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <title></title>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- <span>输入的内容是：</span>
+    <p style="white-space: pre-line;">{{ message }}</p>
+    <textarea v-model="message" placeholder="请输入多行内容..."></textarea> -->
+    <!-- <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames }}</span> -->
+    <!-- <input type="radio" id="one" value="男" v-model="picked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="女" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span> -->
+    <!-- <div id="example-5">
+      <select v-model="selected">
+        <option disabled value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <span>Selected: {{ selected }}</span>
+    </div> -->
+    <div>
+      <input type="text" v-model.lazy="message">
+      <div>{{message}}</div>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: "",
+        checkedNames: [],
+        picked: "",
+        selected:""
+      }
+    })
+  </script>
+</body>
+
+</html>
