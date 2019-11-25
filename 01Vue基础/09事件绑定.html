@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <title></title>
+  <style>
+    .outer {
+      width: 300px;
+      height: 300px;
+      background: pink;
+    }
+
+    .mid {
+      width: 200px;
+      height: 200px;
+      background: powderblue;
+    }
+
+    .inner {
+      width: 100px;
+      height: 100px;
+      background: seagreen;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='app'>
+    <!-- <ul>
+      <li v-for="book in books" :key="book" v-on:click="liClick(book)">
+        {{book}}
+      </li>
+    </ul> -->
+    <!-- <a href="https://www.baidu.com/" @click="gotoWebsite($event)">跳转</a> -->
+    <!-- 修饰符prevent -->
+    <!-- <a href="https://www.baidu.com/" @click.prevent="gotoWebsite">跳转</a> -->
+    <div class="outer" @click="outerClick">
+      <div class="mid" @click.self="midClick">
+        <div class="inner" @click="innerClick"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        books: ['三国演义', '水浒传']
+      },
+      methods: {
+        liClick(value) {
+          console.log(value);
+        },
+        // gotoWebsite(event) {
+        //   event.preventDefault();
+        //   window.location = "https://www.360.cn/"
+        // }
+        gotoWebsite() {
+          window.location = "https://www.360.cn/";
+        },
+        outerClick() {
+          console.log("====outer====");
+        },
+        midClick() {
+          console.log("====mid====");
+        },
+        innerClick() {
+          console.log("====inner====");
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
