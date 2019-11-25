@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <title></title>
+</head>
+
+<body>
+  <div id='app'>
+    <div>
+      <input type="text" v-model:value="keyword">
+    </div>
+    <div>
+      <span>{{result}}</span>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        keyword: "",
+        result: ""
+      },
+      watch: {
+        keyword(newValue, oldValue) {
+          console.log(oldValue);
+          this.result = '正在加载中';
+          setTimeout(() => {
+            this.result = "推荐的结果:" + newValue;
+          }, 1000);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
