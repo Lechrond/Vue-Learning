@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <title>自定义组件插槽</title>
+</head>
+
+<body>
+  <div id='app'>
+    <navigation-link url="">百度</navigation-link>
+  </div>
+  <script>
+    Vue.component("navigation-link", {
+      props: ['url'],
+      template: `
+      <div>
+        <a :href="url">谷歌</a>
+        <slot></slot>
+      </div>
+      `
+    })
+    new Vue({
+      el: '#app',
+      data: {
+
+      }
+    })
+  </script>
+</body>
+
+</html>
