@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <title>自定义命名插槽</title>
+</head>
+
+<body>
+  <div id='app'>
+    <container>
+      <template v-slot:header>这是header</template>
+      xxx
+      <template v-slot:footer>footer</template>
+    </container>
+  </div>
+  <script>
+    Vue.component("container", {
+      template: `
+      <div>
+        <div>
+          <slot name="header"></slot>
+        </div>
+        <slot></slot>
+        <div>
+          <slot name="body"></slot>
+        </div>
+        <div>
+          <slot name="footer"></slot>
+        </div>
+      </div>
+      `
+    })
+    new Vue({
+      el: '#app',
+      data: {
+
+      }
+    })
+  </script>
+</body>
+
+</html>
