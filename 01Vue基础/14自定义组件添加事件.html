@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <title>自定义组件添加事件</title>
+</head>
+
+<body>
+  <div id='app'>
+    <blog-item v-for="blog in blogs" :blog="blog" @check-changed="checkChanged"></blog-item>
+    <h1>选中的组件</h1>
+    <div v-for="blog in selected_blogs">
+      {{blog.title}}
+    </div>
+  </div>
+  <script>
+    Vue.component("blog-item", {
+      props: ['blog'],
+      template: `
+        <div>
+          <span>{{blog.title}}</span>
+          <input type="checkbox" @click="onCheck">
+        </div>
+      `,
+      methods: {
+        onCheck() {
+          // 传递到父事件，这里的方法名可以随便取，但是不能用驼峰，因为大小写不敏感，推荐使用-的形式
+          this.$emit("check-changed", this.blog)
+        }
+      }
+    })
+    new Vue({
+      el: '#app',
+      data: {
+        blogs: [{
+          title: "如何学好vue",
+          id: 1
+        }, {
+          title: "前后分离",
+          id: 2
+        }],
+        selected_blogs: []
+      },
+      methods: {
+        // 接收emit传递的参数
+        checkChanged(blog) {
+          var index = this.selected_blogs.indexOf(blog);
+          if (index < 0) {
+            this.selected_blogs.push(blog);
+          } else {
+            this.selected_blogs.splice(index, 1);
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
