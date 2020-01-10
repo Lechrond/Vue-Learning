@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <title>自定义插槽组件作用域</title>
+</head>
+
+<body>
+  <div id='app'>
+    <container>
+      <template v-slot:header="header">
+        头部
+        {{header.navs}}
+      </template>
+      <template v-slot:footer="footer">
+        尾部
+        {{footer.address}}/{{footer.aboutus}}
+      </template>
+    </container>
+  </div>
+
+  <script>
+    Vue.component("container", {
+      template: `
+        <div>
+          <div class="header">
+            <slot name="header" :navs="nn"></slot>
+          </div>
+          <div class="footer">
+            <slot name="footer" :address="aa" :aboutus="bb"></slot>
+          </div>
+        </div>
+      `,
+      data: function () {
+        return {
+          aa: "公司地址",
+          bb: "关于我们",
+          nn: ['网络设置', '路由设置', '设备管理'],
+        }
+      }
+    })
+    new Vue({
+      el: '#app',
+      data: {
+
+      }
+    })
+  </script>
+</body>
+
+</html>
