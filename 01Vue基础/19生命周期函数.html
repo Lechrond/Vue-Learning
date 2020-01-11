@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <title>生命周期函数</title>
+</head>
+
+<body>
+  <div id='app'>
+    <p id="username">{{username}}</p>
+    <input type="text" v-model="username">
+    <error-view :message="message" v-if="message"></error-view>
+    <button @click="message=''">清除message</button>
+  </div>
+
+  <script>
+    Vue.component("error-view", {
+      props: ['message'],
+      data() {
+        return {
+          hello: "你好"
+        }
+      },
+      template: `
+      <p style="color:red">{{message}}</p>
+      `,
+      beforeDestroy() {
+        console.log("=====beforeDestory=====");
+        console.log(this.hello);
+      },
+      destroyed() {
+        console.log("=====destroyed=====");
+        console.log(this.hello);
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        username: "lechrond",
+        message: "我是消息"
+      },
+      methods: {
+        greet() {
+          alert("hello world")
+        }
+      },
+      beforeCreate() {
+        console.log("=====beforeCreate=====");
+        console.log(this.username);
+        console.log(this.greet);
+      },
+      created() {
+        console.log("=====created=====");
+        console.log(this.username);
+        console.log(this.greet);
+      },
+      beforeMount() {
+        console.log("=====beforeMount=====");
+        console.log(document.getElementById("username").innerText);
+      },
+      mounted() {
+        console.log("=====mounted=====");
+        console.log(document.getElementById("username").innerText);
+      },
+      beforeUpdate() {
+        console.log("=====beforeUpdate=====");
+        console.log(this.username);
+        console.log(document.getElementById("username").innerText);
+      },
+      updated() {
+        console.log("=====updated=====");
+        console.log(this.username);
+        console.log(document.getElementById("username").innerText);
+      }
+    })
+  </script>
+</body>
+
+</html>
