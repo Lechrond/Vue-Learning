@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src='../lib/vue.js'></script>
+  <title>图书管理系统</title>
+</head>
+
+<body>
+  <div id='app'>
+    <div class="container">
+      <h1>图书管理系统</h1>
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="name">名称:</label>
+          <input type="text" class="form-control" id="name" placeholder="名称" v-model="adding_book.name">
+        </div>
+        <div class="form-group">
+          <label for="author">作者:</label>
+          <input type="text" class="form-control" id="author" placeholder="作者" v-model="adding_book.author">
+        </div>
+        <div class="form-group">
+          <label for="price">价格:</label>
+          <input type="number" class="form-control" id="price" placeholder="价格" v-model="adding_book.price">
+        </div>
+        <button type="submit" class="btn btn-primary" @click.prevent="add">提交</button>
+      </form>
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="keywords">搜索关键字：</label>
+          <input type="text" class="form-control" id="keywords" placeholder="请输入关键字" v-model="keywords">
+        </div>
+      </form>
+      <table class="table">
+        <thead>
+          <th>序号</th>
+          <th>名称</th>
+          <th>作者</th>
+          <th>价格</th>
+          <th>日期</th>
+          <th>操作</th>
+        </thead>
+        <tbody>
+          <tr v-for="(book,index) in book_result" :key="book.name">
+            <td>{{index+1}}</td>
+            <td>{{book.name}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.price}}</td>
+            <th>{{book.atime|timeFormat}}</th>
+            <td><button class='btn btn-danger btn-xs' @click="del(index)">删除</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        books: [{
+            name: "三国演义",
+            author: "罗贯中",
+            price: 100,
+            atime: new Date()
+          },
+          {
+            name: "水浒传",
+            author: "施耐庵",
+            price: 99,
+            atime: new Date()
+          },
+        ],
+        adding_book: {
+          name: '',
+          author: '',
+          price: 0,
+          atime: new Date()
+        },
+        keywords: ""
+      },
+      computed: {
+        book_result(){
+          var that = this;
+          if(that.keywords){
+            return that.books.filter(function(book){
+              if(book.name.indexOf(that.keywords) >= 0){
+                return true
+              }else{
+                return false
+              }
+            })
+          }else{
+            return that.books
+          }
+        }
+      },
+      methods: {
+        add() {
+          // 这种写法会传递引用，导致错误
+          // this.books.push(this.adding_book)
+          let book = JSON.parse(JSON.stringify(this.adding_book))
+          this.books.push(book)
+        },
+        del(index) {
+          this.books.splice(index, 1)
+        }
+      },
+      filters: {
+        timeFormat: function (value) {
+          value = new Date(value)
+          let year = value.getFullYear()
+          let month = value.getMonth() + 1
+          let day = value.getDate()
+          let hour = value.getHours()
+          let minute = value.getMinutes()
+
+          return `${year}-${month}-${day} ${hour}:${minute}`
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
