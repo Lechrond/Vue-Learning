@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <script src='../lib/vue-router.js'></script>
+  <title>组件复用</title>
+</head>
+
+<body>
+  <div id='app'>
+    <ul>
+      <li>
+        <router-link to="/profile/张三">张三个人中心</router-link>
+      </li>
+      <li>
+        <router-link to="/profile/李四">李四个人中心</router-link>
+      </li>
+    </ul>
+    <router-view></router-view>
+  </div>
+  <script>
+    let index = Vue.extend({
+      template: "<h1>首页</h1>"
+    })
+    let profile = Vue.extend({
+      template: "<h1>个人中心:{{$route.params.userid}}</h1>",
+      mounted() {
+        console.log(this.$route.params.userid);
+      },
+      // watch:{
+      //   "$route":function(to,from){
+      //     console.log("to:",to);
+      //     console.log("from:",from);
+      //   }
+      // }
+      beforeRouteUpdate: function(to,from,next){
+        console.log("to:",to);
+        console.log("from:",from);
+        // next()
+      }
+    })
+    let router = new VueRouter({
+      routes: [{
+        path: "/",
+        component: index
+      }, {
+        path: "/profile/:userid",
+        component: profile
+      }]
+    })
+    new Vue({
+      el: '#app',
+      router
+    })
+  </script>
+</body>
+
+</html>
