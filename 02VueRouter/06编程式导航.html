@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <script src='../lib/vue-router.js'></script>
+  <title>编程式导航</title>
+</head>
+
+<body>
+  <div id='app'>
+    <button @click="gotoPost">帖子列表</button>
+    <button @click="gotoProfile">个人中心</button>
+    <button @click="gotoLogin">登陆</button>
+    <router-view></router-view>
+  </div>
+  <script>
+    let post = Vue.extend({
+      template: "<h1>帖子列表</h1>"
+    })
+    let profile = Vue.extend({
+      template: "<h1>个人中心:{{$route.params.userid}}</h1>"
+    })
+    let login = Vue.extend({
+      template: "<h1>登陆页面:{{$route.query}}</h1>"
+    })
+    let router = new VueRouter({
+      routes: [{
+          path: '/post',
+          component: post
+        },
+        {
+          path: '/profile/:userid',
+          component: profile
+        },
+        {
+          path: '/login',
+          component: login
+        },
+      ]
+    })
+    new Vue({
+      el: '#app',
+      router,
+      methods: {
+        gotoPost() {
+          this.$router.push("/post")
+        },
+        gotoProfile() {
+          // this.$router.push("/profile/123")
+          this.$router.push({
+            path: "/profile/123"
+          })
+        },
+        gotoLogin() {
+          let currentPath = this.$route.fullPath
+          this.$router.push({
+            path: "/login",
+            query: {
+              from: currentPath
+            }
+          })
+          console.log(this.$route);
+          
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>
