@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <script src='../lib/vue-router.js'></script>
+  <title>重定向和别名</title>
+</head>
+
+<body>
+  <div id='app'>
+    <router-view></router-view>
+  </div>
+  <script>
+    let index = {
+      template: "<h1>首页</h1>"
+    }
+    let article = {
+      template: "<h1>文章列表</h1>"
+    }
+    let router = new VueRouter({
+      routes: [{
+          path: "/",
+          redirect: "/article"
+        },
+        {
+          path: "/article",
+          component: article,
+          alias:'/list'
+        },
+      ]
+    })
+    new Vue({
+      el: '#app',
+      router
+    })
+  </script>
+</body>
+
+</html>
