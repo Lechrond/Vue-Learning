@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <script src='../lib/vue.js'></script>
+  <script src='../lib/vue-router.js'></script>
+  <title>导航守卫</title>
+</head>
+
+<body>
+  <div id='app'>
+    <router-link to="/">首页</router-link>
+    <router-link to="/account">我的账户</router-link>
+    <router-link to="/order">我的订单</router-link>
+    <router-link to="/login">登录</router-link>
+    <router-view></router-view>
+  </div>
+  <script>
+    const logined = false
+    let index = {
+      template: "<h1>首页</h1>"
+    }
+    let account = {
+      template: "<h1>我的账户</h1>"
+    }
+    let order = {
+      template: "<h1>我的订单</h1>"
+    }
+    let login = {
+      template: "<h1>登录</h1>"
+    }
+    var router = new VueRouter({
+      routes: [{
+          path: "/",
+          component: index,
+          name: "index"
+        },
+        {
+          path: "/account",
+          component: account,
+          name: "account"
+        },
+        {
+          path: "/order",
+          component: order,
+          name: "order"
+        },
+        {
+          path: "/login",
+          component: login,
+          name: "login"
+        },
+      ]
+    })
+    router.beforeEach(function (to, from, next) {
+      // next：
+      // next()：按照正常的流程来。
+      // next("/")：就会把之前的路由断掉，走到首页中去
+      // next(false)或者是没有调用next()：不会做任何跳转
+      const authRoutes = ['account', 'order']
+      // 如果请求的是一些需要授权的路由
+      if (authRoutes.indexOf(to.name) >= 0) {
+        // 如果没有登录
+        if (!logined) {
+          next('/login')
+        } else {
+          next()
+        }
+        // 如果是访问登录页面
+      } else if (to.name == 'login') {
+        // 如果已经登录了，就直接跳转到首页
+        if (logined) {
+          next('/')
+        } else {
+          next()
+        }
+        // 其他就按照正常的来走就可以了
+      } else {
+        next()
+      }
+    })
+    router.afterEach(function (to, from) {
+      console.log('to:', to);
+      console.log('from:', from);
+    })
+
+    new Vue({
+      el: '#app',
+      router
+    })
+  </script>
+</body>
+
+</html>
