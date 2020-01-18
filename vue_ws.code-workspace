@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "02VueRouter"
+		},
+		{
+			"path": "03VueCli"
 		}
 	],
 	"settings": {
