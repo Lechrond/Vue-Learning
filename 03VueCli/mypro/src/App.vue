@@ -1,15 +1,19 @@
 <template>
   <div id="app">
     <MyPage></MyPage>
+      <van-button>我是一个按钮</van-button>
+    
   </div>
 </template>
 
 <script>
-import MyPage from "./components/MyPage"
+import MyPage from "./components/MyPage";
+import { Button } from 'vant';
 export default {
   name: 'app',
   components: {
-    MyPage
+    MyPage,
+    [Button.name]:Button
   }
 }
 </script>

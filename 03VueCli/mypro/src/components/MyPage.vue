@@ -16,9 +16,12 @@
   }
 </script>
 
-<style>
-  .info {
+<style scoped lang="scss">
+.mypage{
+  background: grey;
+    .info {
     background: red;
     color: #ffffff
   }
+}
 </style>

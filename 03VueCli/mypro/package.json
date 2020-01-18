@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.4.4",
+    "vant": "^2.4.2",
     "vue": "^2.6.10"
   },
   "devDependencies": {
@@ -18,6 +19,11 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "lib-flexible": "^0.3.2",
+    "node-sass": "^4.12.0",
+    "postcss-pxtorem": "^4.0.1",
+    "sass-loader": "^7.0.3",
+    "vue-loader": "^15.7.1",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
@@ -37,5 +43,19 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {},
+      "postcss-pxtorem": {
+        "rootValue": 37.5,
+        "propList": [
+          "*"
+        ],
+        "selectorBlackList": [
+          "van-*"
+        ]
+      }
+    }
+  }
 }
