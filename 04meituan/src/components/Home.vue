@@ -1,6 +1,7 @@
 <template>
   <div class="home-container">
-    这是首页
+    <i class="iconfont icondingwei"></i>
+    <i class="iconfont iconyoujiantou"></i>
   </div>
 </template>
 
@@ -15,5 +16,7 @@
 </script>
 
 <style scoped lang='scss'>
-
+i{
+  font-size: 32px;
+}
 </style>
