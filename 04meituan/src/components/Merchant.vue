@@ -15,20 +15,31 @@
         </div>
       </div>
     </div>
+    <van-tabs v-model="active">
+      <van-tab title="点菜">内容 1</van-tab>
+      <van-tab title="评价">内容 2</van-tab>
+      <van-tab title="商家">内容 3</van-tab>
+    </van-tabs>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import {
-    NavBar
+    NavBar,
+    Tab,
+    Tabs
   } from 'vant';
   export default {
     name: "Merchant",
     data() {
-      return {}
+      return {
+        active:0
+      }
     },
     components: {
-      [NavBar.name]: NavBar
+      [NavBar.name]: NavBar,
+      [Tab.name]: Tab,
+      [Tabs.name]: Tabs
     }
   }
 </script>
@@ -82,8 +93,4 @@
       }
     }
   }
-</style>
-
-<style scoped>
-  /* .van-nav-bar */
 </style>
