@@ -16,4 +16,7 @@
 
 <style lang="scss">
   @import "styles/init.css";
+  .van-search{
+    padding: 0;
+  }
 </style>
