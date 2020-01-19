@@ -26,18 +26,20 @@
       <!-- 商家列表 -->
       <div class="merchant-list">
         <!-- 一个商家 -->
-        <div class="merchant-item">
-          <img class="logo"
-            src="https://tse1-mm.cn.bing.net/th/id/OIP.R5ObVal1QyB8sq6Kfc8_fwHaFo?w=268&h=200&c=7&o=5&dpr=1.5&pid=1.7">
-          <div class="merchant-info">
-            <div class="merchant-name">肯德基</div>
-            <van-rate class="rate-group" size="14px" v-model="rate" />
-            <div class="tag-group">
-              <van-tag plain>美团专送</van-tag>
-              <van-tag plain>好评如潮</van-tag>
+        <router-link :to="{name:'merchant',params:{merchant_id:1}}">
+          <div class="merchant-item">
+            <img class="logo"
+              src="https://tse1-mm.cn.bing.net/th/id/OIP.R5ObVal1QyB8sq6Kfc8_fwHaFo?w=268&h=200&c=7&o=5&dpr=1.5&pid=1.7">
+            <div class="merchant-info">
+              <div class="merchant-name">肯德基</div>
+              <van-rate class="rate-group" size="14px" v-model="rate" />
+              <div class="tag-group">
+                <van-tag plain>美团专送</van-tag>
+                <van-tag plain>好评如潮</van-tag>
+              </div>
             </div>
           </div>
-        </div>
+        </router-link>
         <div class="merchant-item">
           <img class="logo"
             src="https://tse4-mm.cn.bing.net/th/id/OIP.f6D3f5azAGvXuARXhN1RngHaHa?w=185&h=180&c=7&o=5&dpr=1.5&pid=1.7">

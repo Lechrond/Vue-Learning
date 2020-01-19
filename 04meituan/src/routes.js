@@ -4,6 +4,7 @@
  import Home from "./components/Home";
  import Order from "./components/Order";
  import Mine from "./components/Mine";
+ import Merchant from "./components/Merchant";
 
  //  如果在一个模块化工程中使用它，必须要通过 Vue.use() 明确地安装路由功能：
  Vue.use(VueRouter);
@@ -22,6 +23,11 @@
      path: "/mine",
      component: Mine,
      name: "mine"
+   },
+   {
+     path: "/merchant/:merchant_id",
+     component: Merchant,
+     name: "merchant"
    }
  ];
 

@@ -2,9 +2,9 @@
   <div id="app">
     <router-view></router-view>
     <van-tabbar v-model="active">
-      <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
-      <van-tabbar-item icon="shopping-cart-o" to="/order">订单</van-tabbar-item>
-      <van-tabbar-item icon="setting-o" to="/mine">设置</van-tabbar-item>
+      <van-tabbar-item icon="home-o" :to="{name:'home'}">首页</van-tabbar-item>
+      <van-tabbar-item icon="shopping-cart-o" :to="{name:'order'}">订单</van-tabbar-item>
+      <van-tabbar-item icon="setting-o" :to="{name:'mine'}">设置</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -17,9 +17,9 @@
   } from 'vant';
   export default {
     name: 'app',
-    data(){
+    data() {
       return {
-        active:0
+        active: 0
       }
     },
     components: {
@@ -32,6 +32,4 @@
 
 <style lang="scss">
   @import "styles/init.css";
-
-  
 </style>
