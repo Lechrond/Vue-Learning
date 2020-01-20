@@ -24,8 +24,20 @@
               <li v-for="category in categories" :key="category.name">{{category.name}}</li>
             </ul>
           </div>
-          <div class="goods-group">
-
+          <div class="goods-group" ref="goods">
+            <div class="goods-list">
+              <dl v-for="category in categories" :key="category.name">
+                <dt class="category-name">{{category.name}}</dt>
+                <dd class="goods-item" v-for="goods in category.goods_list" :key="goods.id">
+                  <img :src="goods.picture" class="thumbnail">
+                  <div class="goods-info">
+                    <div class="goods-name">{{goods.name}}</div>
+                    <div class="month-sale">月售十份</div>
+                    <div class="price">￥{{goods.price}}</div>
+                  </div>
+                </dd>
+              </dl>
+            </div>
           </div>
         </div>
       </van-tab>
@@ -53,7 +65,7 @@
     data() {
       return {
         active: 0,
-        categories: []
+        categories: [],
       }
     },
     computed: {
@@ -67,17 +79,22 @@
     mounted() {
       // 提取js中的预设数据
       const pre_categories = kfc['categories'];
-      for (let index = 0; index < pre_categories.length; index++) {
-        const pre_category = pre_categories[index];
-        // 把预设数据添加到当前组件的列表中
-        this.categories.push({
-          id: pre_category.id,
-          name: pre_category.name
-        });
-      }
+      this.categories = pre_categories;
+      // for (let index = 0; index < pre_categories.length; index++) {
+      //   const pre_category = pre_categories[index];
+      //   // 把预设数据添加到当前组件的列表中
+      //   this.categories.push({
+      //     id: pre_category.id,
+      //     name: pre_category.name
+      //   });
+      // }
       // 用于延迟执行一段代码
       this.$nextTick(() => {
-        this.menuScroll = new BScroll(this.$refs.category,{
+        this.menuScroll = new BScroll(this.$refs.category, {
+          scrollY: true,
+          click: true
+        })
+        this.goodsScroll = new BScroll(this.$refs.goods, {
           scrollY: true,
           click: true
         })
@@ -146,7 +163,7 @@
         text-align: center;
         height: 100%;
         overflow: hidden;
-        background: pink;
+        background: WhiteSmoke;
 
         .category-list {
           overflow: hidden;
@@ -161,7 +178,48 @@
       .goods-group {
         flex: 1;
         height: 100%;
-        background: blue;
+        overflow: hidden;
+
+        .goods-list {
+          .category-name {
+            font-size: 14px;
+            font-weight: 500;
+            height: 32px;
+            line-height: 32px;
+            padding-left:10px; 
+            background: WhiteSmoke;
+          }
+
+          .goods-item {
+            margin-left: 10px;
+            display: flex;
+            margin-bottom: 10px;
+
+            .thumbnail {
+              width: 75px;
+              height: 75px;
+            }
+
+            .goods-info {
+              flex: 1;
+              margin-left: 10px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-around;
+
+              .goods-name {
+                font-size: 16px;
+                font-weight: 700;
+              }
+
+              .price {
+                color: #fb4e44;
+                font-size: 16px;
+                font-weight: 700;
+              }
+            }
+          }
+        }
       }
     }
   }
