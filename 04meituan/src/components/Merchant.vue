@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <!-- 顶部返回栏 -->
-    <van-nav-bar left-text="返回" left-arrow @click-left="onClickLeft" />
+    <van-nav-bar left-text="返回" left-arrow />
     <!-- 头部栏 -->
     <div class="header-group">
       <img src="https://tse1-mm.cn.bing.net/th/id/OIP.R5ObVal1QyB8sq6Kfc8_fwHaFo?w=268&h=200&c=7&o=5&dpr=1.5&pid=1.7"
@@ -15,8 +15,20 @@
         </div>
       </div>
     </div>
-    <van-tabs v-model="active">
-      <van-tab title="点菜">内容 1</van-tab>
+    <!-- 标签页 -->
+    <van-tabs class="tab-group" v-model="active">
+      <van-tab title="点菜">
+        <div class="menu-group" :style="menuHeightStyle">
+          <div class="category-group" ref="category">
+            <ul class="category-list">
+              <li v-for="category in categories" :key="category.name">{{category.name}}</li>
+            </ul>
+          </div>
+          <div class="goods-group">
+
+          </div>
+        </div>
+      </van-tab>
       <van-tab title="评价">内容 2</van-tab>
       <van-tab title="商家">内容 3</van-tab>
     </van-tabs>
@@ -29,17 +41,47 @@
     Tab,
     Tabs
   } from 'vant';
+  import BScroll from 'better-scroll';
+  import kfc from "../data/kfc";
   export default {
     name: "Merchant",
-    data() {
-      return {
-        active:0
-      }
-    },
     components: {
       [NavBar.name]: NavBar,
       [Tab.name]: Tab,
       [Tabs.name]: Tabs
+    },
+    data() {
+      return {
+        active: 0,
+        categories: []
+      }
+    },
+    computed: {
+      menuHeightStyle() {
+        const height = window.innerHeight - 164;
+        return {
+          height: height + "px"
+        }
+      }
+    },
+    mounted() {
+      // 提取js中的预设数据
+      const pre_categories = kfc['categories'];
+      for (let index = 0; index < pre_categories.length; index++) {
+        const pre_category = pre_categories[index];
+        // 把预设数据添加到当前组件的列表中
+        this.categories.push({
+          id: pre_category.id,
+          name: pre_category.name
+        });
+      }
+      // 用于延迟执行一段代码
+      this.$nextTick(() => {
+        this.menuScroll = new BScroll(this.$refs.category,{
+          scrollY: true,
+          click: true
+        })
+      })
     }
   }
 </script>
@@ -90,6 +132,36 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+      }
+    }
+  }
+
+  .tab-group {
+    .menu-group {
+      display: flex;
+
+
+      .category-group {
+        width: 80px;
+        text-align: center;
+        height: 100%;
+        overflow: hidden;
+        background: pink;
+
+        .category-list {
+          overflow: hidden;
+
+          li {
+            height: 50px;
+            line-height: 50px;
+          }
+        }
+      }
+
+      .goods-group {
+        flex: 1;
+        height: 100%;
+        background: blue;
       }
     }
   }
