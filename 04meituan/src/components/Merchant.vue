@@ -21,12 +21,14 @@
         <div class="menu-group" :style="menuHeightStyle">
           <div class="category-group" ref="category">
             <ul class="category-list">
-              <li v-for="category in categories" :key="category.name">{{category.name}}</li>
+              <li :class="index==currentIndex?'active':''" v-for="(category,index) in categories" :key="category.name"
+                @click="categoryClick(index)">
+                {{category.name}}</li>
             </ul>
           </div>
           <div class="goods-group" ref="goods">
             <div class="goods-list">
-              <dl v-for="category in categories" :key="category.name">
+              <dl class="goods-dl" v-for="category in categories" :key="category.name">
                 <dt class="category-name">{{category.name}}</dt>
                 <dd class="goods-item" v-for="goods in category.goods_list" :key="goods.id">
                   <img :src="goods.picture" class="thumbnail">
@@ -66,6 +68,8 @@
       return {
         active: 0,
         categories: [],
+        positions: [],
+        currentIndex: 0
       }
     },
     computed: {
@@ -80,14 +84,6 @@
       // 提取js中的预设数据
       const pre_categories = kfc['categories'];
       this.categories = pre_categories;
-      // for (let index = 0; index < pre_categories.length; index++) {
-      //   const pre_category = pre_categories[index];
-      //   // 把预设数据添加到当前组件的列表中
-      //   this.categories.push({
-      //     id: pre_category.id,
-      //     name: pre_category.name
-      //   });
-      // }
       // 用于延迟执行一段代码
       this.$nextTick(() => {
         this.menuScroll = new BScroll(this.$refs.category, {
@@ -98,7 +94,26 @@
           scrollY: true,
           click: true
         })
+        const positions = [0];
+        let offset = 0;
+        const dlList = document.getElementsByClassName("goods-dl");
+        // for...in循环对象
+        // for...of循环数组
+        for (const dl of dlList) {
+          const height = dl.clientHeight;
+          offset += height;
+          positions.push(offset);
+        }
+        this.positions = positions;
       })
+    },
+    methods: {
+      categoryClick(index) {
+        // console.log("当前点击的：", index);
+        const position = this.positions[index];
+        this.goodsScroll.scrollTo(0, -position, 500);
+        this.currentIndex = index;
+      }
     }
   }
 </script>
@@ -171,6 +186,10 @@
           li {
             height: 50px;
             line-height: 50px;
+
+            &.active {
+              background: #D3D3D3;
+            }
           }
         }
       }
@@ -186,14 +205,15 @@
             font-weight: 500;
             height: 32px;
             line-height: 32px;
-            padding-left:10px; 
+            padding-left: 10px;
             background: WhiteSmoke;
           }
 
           .goods-item {
             margin-left: 10px;
             display: flex;
-            margin-bottom: 10px;
+            padding-bottom: 10px;
+            height: 75px;
 
             .thumbnail {
               width: 75px;
