@@ -92,8 +92,26 @@
         })
         this.goodsScroll = new BScroll(this.$refs.goods, {
           scrollY: true,
-          click: true
+          click: true,
+          // 当 probeType为2的时候，会在屏幕滑动的过程中实时的派发scroll事件
+          probeType: 2
         })
+        // 监听当前实例上的scroll事件
+        this.goodsScroll.on("scroll", (pos) => {
+          // 获取到的y坐标是负数，所以需要取反
+          const y = -pos.y;
+          const positions = this.positions;
+          // 使用屏幕最上方的物品的分类决定侧边栏的分类
+          for (let index = positions.length - 1; index >= 0; index--) {
+            const position = positions[index];
+            if (position <= y) {
+              //跳到position
+              this.currentIndex = index;
+              break;
+            }
+          }
+        })
+        // 把每组商品的高度保存起来，方便使用侧边栏控制物品的显示
         const positions = [0];
         let offset = 0;
         const dlList = document.getElementsByClassName("goods-dl");
