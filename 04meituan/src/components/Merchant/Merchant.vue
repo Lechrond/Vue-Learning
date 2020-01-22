@@ -35,8 +35,11 @@
                   <img :src="goods.picture" class="thumbnail">
                   <div class="goods-info">
                     <div class="goods-name">{{goods.name}}</div>
-                    <div class="month-sale">月售十份</div>
-                    <div class="price">￥{{goods.price}}</div>
+                    <div class="month-sale">月售10份</div>
+                    <div class="goods-buy-group">
+                      <div class="price">￥{{goods.price}}</div>
+                      <stepper></stepper>
+                    </div>
                   </div>
                 </dd>
               </dl>
@@ -59,14 +62,16 @@
   } from 'vant';
   import BScroll from 'better-scroll';
   import kfc from "../../data/kfc";
-  import GoodsDetail from "./GoodsDetail"
+  import GoodsDetail from "./GoodsDetail";
+  import Stepper from "./Stepper";
   export default {
     name: "Merchant",
     components: {
       [NavBar.name]: NavBar,
       [Tab.name]: Tab,
       [Tabs.name]: Tabs,
-      [GoodsDetail.name]:GoodsDetail
+      [GoodsDetail.name]: GoodsDetail,
+      [Stepper.name]: Stepper
     },
     data() {
       return {
@@ -74,7 +79,7 @@
         categories: [],
         positions: [],
         currentIndex: 0,
-        detailGoods:undefined
+        detailGoods: undefined
       }
     },
     computed: {
@@ -144,7 +149,7 @@
         let category = this.categories[category_index];
         let goods = category.goods_list[goods_index];
         // 真拷贝
-        this.detailGoods=JSON.parse(JSON.stringify(goods));
+        this.detailGoods = JSON.parse(JSON.stringify(goods));
       }
     }
   }
@@ -264,11 +269,18 @@
                 font-weight: 700;
               }
 
-              .price {
-                color: #fb4e44;
-                font-size: 16px;
-                font-weight: 700;
+              .goods-buy-group {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .price {
+                  color: #fb4e44;
+                  font-size: 16px;
+                  font-weight: 700;
+                }
               }
+
             }
           }
         }

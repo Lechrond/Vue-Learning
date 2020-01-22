@@ -71,7 +71,7 @@
       .goods-detail {
         border-radius: 10px;
         width: 100%;
-        height: 368px;
+        height: 400px;
         overflow: hidden;
         background: #fff;
 
@@ -81,20 +81,26 @@
         }
 
         .info {
-          padding: 10px;
+          padding-left: 10px;
+          padding-right:10px; 
+          height: 164px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: stretch;
 
           .month-sale {
             font-size: 14px;
-            margin-top: 10px;
+            // margin-top: 10px;
           }
 
           .intro {
             font-size: 14px;
-            margin-top: 10px;
+            // margin-top: 10px;
           }
 
           .price {
-            margin-top: 10px;
+            // margin-top: 10px;
             font-size: 18px;
             color: #fb4e44;
           }
