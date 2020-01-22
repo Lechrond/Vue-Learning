@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <van-tabbar v-model="active">
+    <van-tabbar v-model="active" v-if="showTabber">
       <van-tabbar-item icon="home-o" :to="{name:'home'}">首页</van-tabbar-item>
       <van-tabbar-item icon="shopping-cart-o" :to="{name:'order'}">订单</van-tabbar-item>
       <van-tabbar-item icon="setting-o" :to="{name:'mine'}">设置</van-tabbar-item>
@@ -26,6 +26,16 @@
       [Home.name]: Home,
       [Tabbar.name]: Tabbar,
       [TabbarItem.name]: TabbarItem
+    },
+    computed: {
+      showTabber() {
+        const name = this.$route.name;
+        if (name == 'home' || name == 'order' || name == 'mine') {
+          return true;
+        } else {
+          return false;
+        }
+      }
     }
   }
 </script>

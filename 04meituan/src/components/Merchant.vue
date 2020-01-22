@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <!-- 顶部返回栏 -->
-    <van-nav-bar left-text="返回" left-arrow />
+    <van-nav-bar left-text="返回" left-arrow @click-left="onClickLeft" />
     <!-- 头部栏 -->
     <div class="header-group">
       <img src="https://tse1-mm.cn.bing.net/th/id/OIP.R5ObVal1QyB8sq6Kfc8_fwHaFo?w=268&h=200&c=7&o=5&dpr=1.5&pid=1.7"
@@ -131,6 +131,9 @@
         const position = this.positions[index];
         this.goodsScroll.scrollTo(0, -position, 500);
         this.currentIndex = index;
+      },
+      onClickLeft() {
+        this.$router.back()
       }
     }
   }
