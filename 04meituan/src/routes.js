@@ -4,7 +4,7 @@
  import Home from "./components/Home";
  import Order from "./components/Order";
  import Mine from "./components/Mine";
- import Merchant from "./components/Merchant";
+ import Merchant from "./components/Merchant/Merchant";
 
  //  如果在一个模块化工程中使用它，必须要通过 Vue.use() 明确地安装路由功能：
  Vue.use(VueRouter);

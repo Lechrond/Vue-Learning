@@ -28,9 +28,10 @@
           </div>
           <div class="goods-group" ref="goods">
             <div class="goods-list">
-              <dl class="goods-dl" v-for="category in categories" :key="category.name">
+              <dl class="goods-dl" v-for="(category,category_index) in categories" :key="category.name">
                 <dt class="category-name">{{category.name}}</dt>
-                <dd class="goods-item" v-for="goods in category.goods_list" :key="goods.id">
+                <dd class="goods-item" v-for="(goods,goods_index) in category.goods_list" :key="goods.id"
+                  @click="goodsClick(category_index,goods_index)">
                   <img :src="goods.picture" class="thumbnail">
                   <div class="goods-info">
                     <div class="goods-name">{{goods.name}}</div>
@@ -56,7 +57,7 @@
     Tabs
   } from 'vant';
   import BScroll from 'better-scroll';
-  import kfc from "../data/kfc";
+  import kfc from "../../data/kfc";
   export default {
     name: "Merchant",
     components: {
@@ -134,6 +135,12 @@
       },
       onClickLeft() {
         this.$router.back()
+      },
+      goodsClick(category_index, goods_index) {
+        let category = this.categories[category_index];
+        let goods = category.goods_list[goods_index];
+        console.log(goods);
+
       }
     }
   }
