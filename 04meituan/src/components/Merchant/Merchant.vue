@@ -47,6 +47,7 @@
       <van-tab title="评价">内容 2</van-tab>
       <van-tab title="商家">内容 3</van-tab>
     </van-tabs>
+    <goods-detail :goods="detailGoods"></goods-detail>
   </div>
 </template>
 
@@ -58,19 +59,22 @@
   } from 'vant';
   import BScroll from 'better-scroll';
   import kfc from "../../data/kfc";
+  import GoodsDetail from "./GoodsDetail"
   export default {
     name: "Merchant",
     components: {
       [NavBar.name]: NavBar,
       [Tab.name]: Tab,
-      [Tabs.name]: Tabs
+      [Tabs.name]: Tabs,
+      [GoodsDetail.name]:GoodsDetail
     },
     data() {
       return {
         active: 0,
         categories: [],
         positions: [],
-        currentIndex: 0
+        currentIndex: 0,
+        detailGoods:undefined
       }
     },
     computed: {
@@ -139,8 +143,8 @@
       goodsClick(category_index, goods_index) {
         let category = this.categories[category_index];
         let goods = category.goods_list[goods_index];
-        console.log(goods);
-
+        // 真拷贝
+        this.detailGoods=JSON.parse(JSON.stringify(goods));
       }
     }
   }
