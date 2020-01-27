@@ -95,7 +95,7 @@
       },
       gotoSettle() {
         this.$store.commit("setCart", this.goodsList)
-        this.$router.push("/submitorder")
+        this.$router.push({name:'submit_order'})
       }
     }
   }

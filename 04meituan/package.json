@@ -12,7 +12,8 @@
     "core-js": "^3.4.4",
     "vant": "^2.4.2",
     "vue": "^2.6.10",
-    "vue-router": "^3.1.5"
+    "vue-router": "^3.1.5",
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
@@ -40,8 +41,15 @@
       "eslint:recommended"
     ],
     "rules": {
-      "no-console":"off",
-      "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
+      "no-console": "off",
+      "no-unused-vars": [
+        "warn",
+        {
+          "vars": "all",
+          "args": "after-used",
+          "ignoreRestSiblings": false
+        }
+      ]
     },
     "parserOptions": {
       "parser": "babel-eslint"
