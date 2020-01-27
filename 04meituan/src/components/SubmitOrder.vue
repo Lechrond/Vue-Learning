@@ -2,7 +2,7 @@
   <div class="so-container">
     <mt-nav-bar leftArrowStyle="black" title="确认订单"></mt-nav-bar>
     <van-cell-group>
-      <van-cell icon="location-o" title="请选择收获地址" is-link>
+      <van-cell icon="location-o" title="请选择收获地址" is-link :to="{name:'address_list'}">
         <template slot="title" v-if="address">
           <div class="user-info">
             <span>{{address.realname}}</span>
