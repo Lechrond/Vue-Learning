@@ -9,18 +9,30 @@
 <script type="text/ecmascript-6">
   export default {
     name: "stepper",
+    props: {
+      value: {
+        type: Number,
+        default: 0
+      }
+    },
+    model: {
+      prop: "value",
+      event: "value-changed"
+    },
     data() {
       return {
-        value: 0
+        // value: 0
       }
     },
     components: {},
     methods: {
       subClick() {
-        this.value -= 1;
+        // this.value -= 1;
+        this.$emit("value-changed", this.value - 1)
       },
       addClick() {
-        this.value += 1;
+        // this.value += 1;
+        this.$emit("value-changed", this.value + 1)
       }
     }
   }

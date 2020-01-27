@@ -38,7 +38,7 @@
                     <div class="month-sale">月售10份</div>
                     <div class="goods-buy-group">
                       <div class="price">￥{{goods.price}}</div>
-                      <stepper></stepper>
+                      <stepper v-model="goods.count"></stepper>
                     </div>
                   </div>
                 </dd>
@@ -51,6 +51,7 @@
       <van-tab title="商家">内容 3</van-tab>
     </van-tabs>
     <goods-detail :goods="detailGoods"></goods-detail>
+    <cart :categories="categories"></cart>
   </div>
 </template>
 
@@ -64,6 +65,8 @@
   import kfc from "../../data/kfc";
   import GoodsDetail from "./GoodsDetail";
   import Stepper from "./Stepper";
+  import Cart from "./Cart";
+
   export default {
     name: "Merchant",
     components: {
@@ -71,7 +74,8 @@
       [Tab.name]: Tab,
       [Tabs.name]: Tabs,
       [GoodsDetail.name]: GoodsDetail,
-      [Stepper.name]: Stepper
+      [Stepper.name]: Stepper,
+      [Cart.name]: Cart
     },
     data() {
       return {
@@ -93,6 +97,11 @@
     mounted() {
       // 提取js中的预设数据
       const pre_categories = kfc['categories'];
+      for (const category of pre_categories) {
+        for (const goods of category.goods_list) {
+          goods.count = 0;
+        }
+      }
       this.categories = pre_categories;
       // 用于延迟执行一段代码
       this.$nextTick(() => {
