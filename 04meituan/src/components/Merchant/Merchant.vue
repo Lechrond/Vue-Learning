@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <!-- 顶部返回栏 -->
-    <van-nav-bar left-text="返回" left-arrow @click-left="onClickLeft" />
+    <mt-nav-bar></mt-nav-bar>
     <!-- 头部栏 -->
     <div class="header-group">
       <img src="https://tse1-mm.cn.bing.net/th/id/OIP.R5ObVal1QyB8sq6Kfc8_fwHaFo?w=268&h=200&c=7&o=5&dpr=1.5&pid=1.7"
@@ -66,16 +66,17 @@
   import GoodsDetail from "./GoodsDetail";
   import Stepper from "./Stepper";
   import Cart from "./Cart";
+  import MTNavBar from "../Common/MTNavBar";
 
   export default {
     name: "Merchant",
     components: {
-      [NavBar.name]: NavBar,
       [Tab.name]: Tab,
       [Tabs.name]: Tabs,
       [GoodsDetail.name]: GoodsDetail,
       [Stepper.name]: Stepper,
-      [Cart.name]: Cart
+      [Cart.name]: Cart,
+      [MTNavBar.name]: MTNavBar,
     },
     data() {
       return {
@@ -151,9 +152,6 @@
         this.goodsScroll.scrollTo(0, -position, 500);
         this.currentIndex = index;
       },
-      onClickLeft() {
-        this.$router.back()
-      },
       goodsClick(category_index, goods_index) {
         let category = this.categories[category_index];
         let goods = category.goods_list[goods_index];
@@ -165,24 +163,6 @@
 </script>
 
 <style scoped lang='scss'>
-  .van-icon-arrow-left:before {
-    color: white;
-  }
-
-  .van-nav-bar__text {
-    color: white;
-  }
-
-  .van-nav-bar {
-    // 底色变成透明，使用header部分的底色
-    background: none;
-  }
-
-  .van-hairline--bottom::after {
-    // 清除边框
-    border: none;
-  }
-
   .header-group {
     background: #2E2F38;
     padding: 10px;
