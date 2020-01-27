@@ -1,15 +1,11 @@
 <template>
   <div class="">
-    这是提交界面
-    <ul>
-      <li v-for="goods in goodList" :key="goods.id+goods.name">
-        {{goods.name}}
-      </li>
-    </ul>
+    <mt-nav-bar leftArrowStyle="black" title="确认订单"></mt-nav-bar>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import MTNavBar from "./Common/MTNavBar";
   export default {
     name: "SubmitOrder",
     data() {
@@ -20,7 +16,9 @@
     mounted() {
       this.goodList = this.$store.state.cart
     },
-    components: {}
+    components: {
+      [MTNavBar.name]: MTNavBar
+    }
   }
 </script>
 

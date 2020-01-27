@@ -1,20 +1,39 @@
 <template>
   <div class="mt-nav-bar">
-    <van-nav-bar left-text="返回" left-arrow @click-left="onClickLeft" />
+    <van-nav-bar @click-left="onClickLeft" :title="title">
+      <van-icon name="arrow-left" slot="left" :color="leftArrowColor" />
+    </van-nav-bar>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import {
-    NavBar
+    NavBar,
+    Icon
   } from 'vant';
   export default {
     name: "mt-nav-bar",
+    props: {
+      leftArrowStyle: {
+        type: String,
+        default: "white"
+      },
+      title: {
+        type: String,
+        default: ""
+      }
+    },
+    computed: {
+      leftArrowColor() {
+        return this.leftArrowStyle == 'white' ? "#fff" : "#000";
+      }
+    },
     data() {
       return {}
     },
     components: {
       [NavBar.name]: NavBar,
+      [Icon.name]: Icon
     },
     methods: {
       onClickLeft() {
@@ -23,15 +42,7 @@
     }
   }
 </script>
-
 <style scoped lang='scss'>
-  .van-icon-arrow-left:before {
-    color: white;
-  }
-
-  .van-nav-bar__text {
-    color: white;
-  }
 
   .van-nav-bar {
     // 底色变成透明，使用header部分的底色
