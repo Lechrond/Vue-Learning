@@ -36,10 +36,10 @@
     },
     methods: {
       onAdd() {
-        console.log("goto add...");
+        this.$router.push("/address/add");
       },
       onEdit() {
-        console.log("goto edit...");
+        this.$router.push("/address/edit")
       }
     }
   }

@@ -7,6 +7,7 @@
  import Merchant from "./components/Merchant/Merchant";
  import SubmitOrder from "./components/SubmitOrder";
  import MTAddressList from "./components/MTAddressList";
+ import MTAddressEdit from "./components/MTAddressEdit";
 
  //  如果在一个模块化工程中使用它，必须要通过 Vue.use() 明确地安装路由功能：
  Vue.use(VueRouter);
@@ -35,11 +36,22 @@
      path: '/submitorder',
      component: SubmitOrder,
      name: 'submit_order'
-   }, {
+   },
+   {
      path: '/address',
      component: MTAddressList,
      name: 'address_list'
-   }
+   },
+   {
+     path: '/address/add',
+     component: MTAddressEdit,
+     name: 'address_add'
+   },
+   {
+     path: '/address/edit',
+     component: MTAddressEdit,
+     name: 'address_edit'
+   },
  ];
 
  const router = new VueRouter({
