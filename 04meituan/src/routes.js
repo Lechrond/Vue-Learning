@@ -8,6 +8,7 @@
  import SubmitOrder from "./components/SubmitOrder";
  import MTAddressList from "./components/MTAddressList";
  import MTAddressEdit from "./components/MTAddressEdit";
+ import Login from "./components/Login";
 
  //  如果在一个模块化工程中使用它，必须要通过 Vue.use() 明确地安装路由功能：
  Vue.use(VueRouter);
@@ -52,6 +53,11 @@
      component: MTAddressEdit,
      name: 'address_edit'
    },
+   {
+     path: "/login",
+     component: Login,
+     name: "login"
+   }
  ];
 
  const router = new VueRouter({
